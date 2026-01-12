@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Day Countdown</title>
+    <!-- We will create this CSS file in the next step -->
+    <link rel="stylesheet" href="global.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="outer-frame">
+        <div class="card fade-in">
+            <!-- Heart Decorations -->
+            <div class="heart left-heart"></div>
+            <div class="heart right-heart"></div>
+
+            <header>
+                <h1>Its Special Day For Me</h1>
+                <p class="date-subtitle">13-january-2026</p>
+            </header>
+
+            <div class="timer-display">
+                <div class="timer-segment">
+                    <div class="digit-row" id="hours-row">
+                        <div class="digit-box">0</div>
+                        <div class="digit-box">0</div>
+                    </div>
+                    <span>Hours</span>
+                </div>
+
+                <div class="timer-segment">
+                    <div class="digit-row" id="minutes-row">
+                        <div class="digit-box">0</div>
+                        <div class="digit-box">0</div>
+                    </div>
+                    <span>Minutes</span>
+                </div>
+
+                <div class="timer-segment">
+                    <div class="digit-row" id="seconds-row">
+                        <div class="digit-box">0</div>
+                        <div class="digit-box">0</div>
+                    </div>
+                    <span>Seconds</span>
+                </div>
+            </div>
+
+            <!-- This links to Phase 2 -->
+            <a href="phase2/index.html" class="btn-pink">Start Cellebration</a>
+        </div>
+    </div>
+
+    <script>
+        // Set the target date: Jan 13, 2026
+        const targetDate = new Date("Jan 13, 2026 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            // Math for hours, minutes, seconds
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            renderDigits('hours-row', hours);
+            renderDigits('minutes-row', mins);
+            renderDigits('seconds-row', secs);
+        }
+
+        function renderDigits(id, value) {
+            const container = document.getElementById(id);
+            const strValue = String(value).padStart(2, '0');
+            container.innerHTML = ''; // Clear previous
+            
+            for (let char of strValue) {
+                const box = document.createElement('div');
+                box.className = 'digit-box';
+                box.innerText = char;
+                container.appendChild(box);
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

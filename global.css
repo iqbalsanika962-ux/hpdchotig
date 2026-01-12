@@ -1,0 +1,156 @@
+/* --- VARIABLES --- */
+:root {
+    --bg-yellow: #fdf6cc;   /* Light yellow from your image */
+    --pink: #ff008a;        /* Bright pink from your image */
+    --white: #ffffff;
+    --text-black: #1a1a1a;
+}
+
+/* --- RESET & BASE --- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #e8e8e8; /* Background behind the card */
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- PAGE TRANSITION --- */
+.fade-in {
+    animation: fadeInPage 0.8s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- THE WHITE FRAME INTERFACE --- */
+.outer-frame {
+    background-color: var(--white);
+    padding: 15px; /* This creates the white border effect */
+    border-radius: 50px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    width: 95%;
+    max-width: 900px;
+}
+
+.card {
+    background-color: var(--bg-yellow);
+    border-radius: 40px;
+    padding: 60px 20px;
+    position: relative;
+    text-align: center;
+    overflow: hidden; /* Keeps hearts inside */
+}
+
+/* --- ABSTRACT DOTTED HEARTS --- */
+.heart {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: var(--pink);
+    /* Creates the dotted texture */
+    -webkit-mask-image: radial-gradient(circle, #000 15%, transparent 20%);
+    mask-image: radial-gradient(circle, #000 15%, transparent 20%);
+    -webkit-mask-size: 6px 6px;
+    mask-size: 6px 6px;
+    /* Clips into a heart shape */
+    clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+}
+
+.left-heart { top: 30px; left: 40px; transform: scale(3.5) rotate(-15deg); opacity: 0.7; }
+.right-heart { top: 30px; right: 40px; transform: scale(3.5) rotate(15deg); opacity: 0.7; }
+
+/* --- TYPOGRAPHY --- */
+h1 {
+    color: var(--pink);
+    font-size: clamp(1.8rem, 5vw, 3.5rem); /* Responsive font size */
+    margin: 0;
+    font-weight: 700;
+}
+
+.date-subtitle {
+    color: var(--pink);
+    font-size: 1.4rem;
+    margin-top: 5px;
+    margin-bottom: 40px;
+}
+
+/* --- TIMER DIGITS --- */
+.timer-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.timer-segment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.timer-segment span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-black);
+}
+
+.digit-row {
+    display: flex;
+    gap: 6px;
+}
+
+.digit-box {
+    background-color: var(--pink);
+    color: var(--text-black);
+    width: 50px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* --- BUTTON STYLE --- */
+.btn-pink {
+    background-color: var(--pink);
+    color: white;
+    text-decoration: none;
+    padding: 15px 50px;
+    border-radius: 50px;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 600;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba(255, 0, 138, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-pink:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 25px rgba(255, 0, 138, 0.4);
+}
+
+/* --- RESPONSIVE FIXES FOR MOBILE --- */
+@media (max-width: 600px) {
+    .left-heart, .right-heart { display: none; } /* Hide hearts on very small screens */
+    .timer-display { gap: 10px; }
+    .digit-box { width: 40px; height: 55px; font-size: 1.8rem; }
+    .timer-segment span { font-size: 1.2rem; }
+    .card { padding: 40px 10px; }
+}
